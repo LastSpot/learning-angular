@@ -1,4 +1,4 @@
-# learning-angular
+# Learn Angular 19
 
 This project is for learning how to set up Angular with best practices.
 
