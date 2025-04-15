@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { HousingService } from '../../services/housing.service';
@@ -11,7 +11,7 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
   templateUrl: './details.component.html',
   styleUrl: './details.component.scss'
 })
-export class DetailsComponent {
+export class DetailsComponent implements OnInit {
   route: ActivatedRoute = inject(ActivatedRoute);
   housingService = inject(HousingService);
   housingLocation: HousingLocation | undefined;
@@ -21,10 +21,7 @@ export class DetailsComponent {
     email: new FormControl(''),
   });
 
-  constructor() {
-    const housingLocationId = Number(this.route.snapshot.params['id']);
-    this.housingService.getAllHousingLocationById(housingLocationId).subscribe((housingLocation) => this.housingLocation = housingLocation)
-  }
+  constructor() { }
 
   submitApplication() {
     this.housingService.submitApplication(
@@ -33,6 +30,11 @@ export class DetailsComponent {
       this.applyForm.value.email ?? '',
     );
     this.applyForm.reset();
+  }
+
+  ngOnInit(): void {
+    const housingLocationId = Number(this.route.snapshot.params['id']);
+    this.housingService.getAllHousingLocationById(housingLocationId).subscribe((housingLocation) => this.housingLocation = housingLocation)
   }
 
 }
