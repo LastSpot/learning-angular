@@ -11,8 +11,8 @@ import { HousingService } from '../../services/housing.service';
   styleUrl: './home.component.scss'
 })
 export class HomeComponent implements OnInit {
-  housingLocationList: HousingLocation[] = [];
-  filteredLocationList: HousingLocation[] = [];
+  private housingLocationList: HousingLocation[] = [];
+  protected filteredLocationList: HousingLocation[] = [];
 
   constructor(
     private housingService: HousingService
